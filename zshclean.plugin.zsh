@@ -10,6 +10,7 @@ zshclean_common_temp_files=(
 	".zsh_history"
 	".zsh_sessions"
 	"*.zwc"
+	".local/state/nvim/swap/*.swp"
 )
 
 zshclean_macos_temp_files=()
