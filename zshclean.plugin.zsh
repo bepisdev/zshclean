@@ -63,11 +63,13 @@ zshclean() {
 		for i in "${zshclean_common_temp_files[@]}"; do
 			echo "$i"
 		done
+		echo "\n"
 		echo "Linux Files: (Applies to Linux based systems)"
 		echo "======================================================"
 		for i in "${zshclean_linux_temp_files[@]}"; do
 			echo "$i"
 		done
+		echo "\n"
 		echo "MacOS Files: (Applies to MacOS / Darwin systems)"
 		echo "======================================================"
 		for i in "${zshclean_macos_temp_files[@]}"; do
