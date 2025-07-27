@@ -18,7 +18,7 @@ You can use zshclean with popular Zsh plugin managers or by sourcing the plugin 
 Add this to your `.zshrc`:
 
 ```zsh
-zplug "bepisdev/zshclean"
+zplug "bepisdev/zshclean", from:github, as:plugin
 ```
 
 ### Using [Oh My Zsh](https://ohmyz.sh/)
