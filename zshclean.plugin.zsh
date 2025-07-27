@@ -73,7 +73,7 @@ zshclean() {
 		for i in "${zshclean_macos_temp_files[@]}"; do
 			echo "$i"
 		done
-		exit 0
+		return
 	fi
 
 	local os_type
