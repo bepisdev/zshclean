@@ -45,6 +45,7 @@ zshclean_detect_os() {
 zshclean() {
 	# define options
 	local dry_run=0
+	local inspect_flag=0
 
 	# Look for -n or --dry-run option
 	if [[ "$1" == "-n" || "$1" == "--dry-run" ]]; then
@@ -52,6 +53,27 @@ zshclean() {
 		dry_run=1
 	else
 		echo "Cleaning up temporary files and clutter from \$HOME..."
+	fi
+
+	if [[ "$1" == "-i" || "$1" == "--inspect" ]]; then
+		echo "zshclean inspection. Listing target file lists"
+		echo "\n"
+		echo "Common Files: (Applies to all systems)"
+		echo "======================================================"
+		for i in "${zshclean_common_temp_files[@]}"; do
+			echo "$i"
+		done
+		echo "Linux Files: (Applies to Linux based systems)"
+		echo "======================================================"
+		for i in "${zshclean_linux_temp_files[@]}"; do
+			echo "$i"
+		done
+		echo "MacOS Files: (Applies to MacOS / Darwin systems)"
+		echo "======================================================"
+		for i in "${zshclean_macos_temp_files[@]}"; do
+			echo "$i"
+		done
+		exit 0
 	fi
 
 	local os_type

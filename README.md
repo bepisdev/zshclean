@@ -69,5 +69,5 @@ This will delete common temporary files and directories from your `$HOME` direct
 
 ## Todo
 
-- [ ] Flags to inspect target files/directories
+- [x] Flags to inspect target files/directories
 - [ ] Functions to configure and modify the target file lists
