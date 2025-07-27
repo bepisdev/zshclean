@@ -13,7 +13,7 @@ zshclean_common_temp_files=(
 	".local/state/nvim/swap/*.swp"
 )
 
-zshclean_macos_temp_files=()
+zshclean_macos_temp_files=(
 	".DS_Store"
 	".Trash"
   ".CFUserTextEncoding"
@@ -25,7 +25,7 @@ zshclean_macos_temp_files=()
   "Library/Logs"
 )
 
-zshclean_linux_temp_files=()
+zshclean_linux_temp_files=(
 	".local/share/Trash"
 	".sudo_as_admin_successful"
 	".xsession-errors"
