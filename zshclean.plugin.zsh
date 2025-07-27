@@ -1,8 +1,7 @@
 # zshclean.plugin.zsh
 # Description: Zsh plugin to clean up temporary files and clutter from $HOME
 
-# Common temp files across systems
-common_temp_files=(
+zshclean_common_temp_files=(
 	".cache"
 	".lesshst"
 	".viminfo"
@@ -13,8 +12,7 @@ common_temp_files=(
 	"*.zwc"
 )
 
-# MacOS Specific temp files
-macos_temp_files=()
+zshclean_macos_temp_files=()
 	".DS_Store"
 	".Trash"
   ".CFUserTextEncoding"
@@ -26,16 +24,14 @@ macos_temp_files=()
   "Library/Logs"
 )
 
-# Linux specific temp files
-linux_temp_files=()
+zshclean_linux_temp_files=()
 	".local/share/Trash"
 	".sudo_as_admin_successful"
 	".xsession-errors"
 	".thumbnails"
 )
 
-# OS detection function
-zshclean_detect_os() {}
+zshclean_detect_os() {
 	local unameOut
 	unameOut=$(uname -s)
 	case "${unameOut}" in
@@ -43,4 +39,36 @@ zshclean_detect_os() {}
 		Darwin*) echo "macos";;
 		*) echo "unknown";;
 	esac
+}
+
+zshclean() {
+	local os_type
+	os_type=$(zshclean_detect_os)
+
+	if [[ "$os_type" == "unknown" ]]; then
+		echo "Unsupported OS type: $os_type"
+		return 1
+	fi
+
+	if [[ "$os_type" == "macos" ]]; then
+		local temp_files=("${zshclean_common_temp_files[@]}" "${zshclean_macos_temp_files[@]}")
+	elif [[ "$os_type" == "linux" ]]; then
+		local temp_files=("${zshclean_common_temp_files[@]}" "${zshclean_linux_temp_files[@]}")
+	fi
+
+	for file in "${temp_files[@]}"; do
+		local zshclean_file_path="$HOME/$file"
+		
+		if [[ -e "$zshclean_file_path" ]]; then
+			if [[ -d "$zshclean_file_path" ]]; then
+				echo "Removing directory: $zshclean_file_path"
+				rm -rf "$zshclean_file_path"
+			else
+				echo "Removing file: $zshclean_file_path"
+				rm -f "$zshclean_file_path"
+			fi
+		else
+			echo "File/Directory does not exist: $zshclean_file_path"
+		fi
+	done
 }
