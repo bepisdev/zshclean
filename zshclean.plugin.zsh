@@ -43,6 +43,17 @@ zshclean_detect_os() {
 }
 
 zshclean() {
+	# define options
+	local dry_run=0
+
+	# Look for -n or --dry-run option
+	if [[ "$1" == "-n" || "$1" == "--dry-run" ]]; then
+		echo "Dry run mode: No files will be deleted."
+		dry_run=1
+	else
+		echo "Cleaning up temporary files and clutter from \$HOME..."
+	fi
+
 	local os_type
 	os_type=$(zshclean_detect_os)
 
@@ -62,11 +73,19 @@ zshclean() {
 		
 		if [[ -e "$zshclean_file_path" ]]; then
 			if [[ -d "$zshclean_file_path" ]]; then
-				echo "Removing directory: $zshclean_file_path"
-				rm -rf "$zshclean_file_path"
+				if [[ $dry_run -eq 0 ]]; then
+					echo "Removing directory: $zshclean_file_path"
+					rm -rf "$zshclean_file_path"
+				else
+					echo "Dry run: Would remove directory: $zshclean_file_path"
+				fi
 			else
-				echo "Removing file: $zshclean_file_path"
-				rm -f "$zshclean_file_path"
+				if [[ $dry_run -eq 0 ]]; then
+					echo "Removing file: $zshclean_file_path"
+					rm -f "$zshclean_file_path"
+				else
+					echo "Dry run: Would remove file: $zshclean_file_path"
+				fi
 			fi
 		else
 			echo "File/Directory does not exist: $zshclean_file_path"
