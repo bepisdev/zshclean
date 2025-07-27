@@ -1,6 +1,7 @@
 # zshclean.plugin.zsh
 # Description: Zsh plugin to clean up temporary files and clutter from $HOME
 
+# Common temp files across systems
 common_temp_files=(
 	".cache"
 	".lesshst"
@@ -12,6 +13,7 @@ common_temp_files=(
 	"*.zwc"
 )
 
+# MacOS Specific temp files
 macos_temp_files=()
 	".DS_Store"
 	".Trash"
@@ -24,9 +26,21 @@ macos_temp_files=()
   "Library/Logs"
 )
 
+# Linux specific temp files
 linux_temp_files=()
 	".local/share/Trash"
 	".sudo_as_admin_successful"
 	".xsession-errors"
 	".thumbnails"
 )
+
+# OS detection function
+zshclean_detect_os() {}
+	local unameOut
+	unameOut=$(uname -s)
+	case "${unameOut}" in
+		Linux*) echo "linux";;
+		Darwin*) echo "macos";;
+		*) echo "unknown";;
+	esac
+}
