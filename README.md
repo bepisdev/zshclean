@@ -18,7 +18,7 @@ You can use zshclean with popular Zsh plugin managers or by sourcing the plugin 
 Add this to your `.zshrc`:
 
 ```zsh
-zplug "yourusername/zshclean"
+zplug "bepisdev/zshclean"
 ```
 
 ### Using [Oh My Zsh](https://ohmyz.sh/)
@@ -26,7 +26,7 @@ zplug "yourusername/zshclean"
 Clone the repo into your custom plugins directory:
 
 ```sh
-git clone https://github.com/yourusername/zshclean ~/.oh-my-zsh/custom/plugins/zshclean
+git clone https://github.com/bepisdev/zshclean ~/.oh-my-zsh/custom/plugins/zshclean
 ```
 
 Then add `zshclean` to your `plugins` array in `.zshrc`:
@@ -40,7 +40,7 @@ plugins=(... zshclean)
 Add the following to your `.zshrc`:
 
 ```zsh
-antigen bundle yourusername/zshclean
+antigen bundle bepisdev/zshclean
 ```
 
 Then reload your shell or run:
@@ -54,7 +54,7 @@ antigen apply
 Add this to your `.zshrc`:
 
 ```zsh
-zinit light yourusername/zshclean
+zinit light bepisdev/zshclean
 ```
 
 ## Usage
